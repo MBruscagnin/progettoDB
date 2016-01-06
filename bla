@@ -1,9 +1,0 @@
-INSERT INTO anagrafica(nome, cognome, data_nascita,
-codice_fiscale)
-VALUES
-('Mario', 'Rossi', '1970-05-23', 'RSSMRA70R23C932A'),
-('Carla', 'Bianchi', '1977-03-25', 'BNCCRL77R23C321B'),
-('Giuseppe', 'Verdi', '2004-01-29', 'VRDGSP04R29D938A'),
-('Giovanna', 'Gallo', '2006-04-05', 'GLLGVN06R05D938F'),
-('Laura', 'Rossi', '2009-02-12', 'RSSLRA09R12D228O');
- 
