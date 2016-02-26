@@ -25,7 +25,6 @@ session_start();
 		/* Connection String */
 		$dsn = 'pgsql:host='.$pdo_host.';port='.$pdo_port.';dbname='.$pdo_database.';user='.$pdo_user.'; password='.$pdo_password;
 		$dbConn = new PDO($dsn);
-		//$dbConn = new PDO('pgsql:host=dblab.dsi.unive.it;port=5432;dbname=a2014u53','a2014u53','.bXiO/jG');
 		$dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	?>	
 </head>
