@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -6,50 +6,42 @@
 <link href="css/reset.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/screen.css" rel="stylesheet" type="text/css" media="screen" />
 <?
-session_start();//accesso a tutti
-
-		/*CONNESSIONE AL DTABASE*/
-		error_reporting(E_ALL);
+session_start();
+//pagina visibile a tutti
+		/*CONNESSIONE AL db*/
+		error_reporting(E_ALL & ~E_NOTICE);
 		/* Load connection data */
 		require_once('dbcredentials.php');
 		/* Connection String */
-		$dsn = 'pgsql:host=localhost port=5432 dbname='.$pdo_database.' user='.$pdo_user.' password='.$pdo_password;
-		$conn = new PDO($dsn);
-	?>
+		$dsn = 'pgsql:host='.$pdo_host.';port='.$pdo_port.';dbname='.$pdo_database.';user='.$pdo_user.'; password='.$pdo_password;
+		$dbConn = new PDO($dsn);
+		$dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	?>	
 </head>
-<body>
-<div id="all">
-	<div id="header">
-		<div id="logo"> <a  href="home.php"><img src="images/logo.jpg"></a> </div>	 
-		<div id="accesso">
+<header>
+<h1><a href="index.php">Il Ricettario</a></h1> 
+<p>	
 			<?php
-				if (isset($_SESSION['user'])){
-					echo "ciao user ".$_SESSION['user'];
+				if (isset($_SESSION['user'])){ //visualizzazione UTENTE
+					echo "Ciao ".$_SESSION['user'];
 			?>		<form action="logout.php">
 						<button>Esci</button>
 					</form>
-			<?	}else{
-					if(isset($_SESSION['admin'])){
-						echo "ciao admin ".$_SESSION['admin'];
-			?>			<form action="logout.php">
-							<button>Esci</button>
-						</form>
-			<?		}else{
-			?>			<p><a href="accesso.php">ACCEDI</a></p>
-						<p><a href="registrazione.php">REGISTRATI</a></p>
+			<?		}else{//visualizzazione GUEST
+			?>			<p><a href="registrazione.php">Registrati</a> -
+						<a href="accesso.php">Accedi</a></p>
 			<?		}
-				}
+				//}
 			?>
-		</div>
-	</div>
-	<div id="menu">
-		<ul>
-			<li><a href="listafilm.php"><p align="center">FILM</p></a></li>
-			<li><a href="programmazione.php"><p align="center">PROGRAMMAZIONE</p></a></li>
-			<li><a href="sale.php"><p align="center">SALE</p></a></li>
-			<li><a href="contatti.php"><p align="center">CONTATTI</p></a></li>
-		</ul>
-	</div>
+</p>
+<hr>
+		<p>
+			<a href="ricette.php">Ricette</a> | <a href="ricerca.php">Cerca</a>
+		</p>
+</header>	
+<body>
+<div id="all">
+
 <div id="main"><div id="content">
 	<div id="centro">
 		<h1>LISTA DEI NOSTRI FILM:</h1>
